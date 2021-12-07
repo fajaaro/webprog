@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('app.css') }}">
 </head>
 <body>
+    @php
+        $user = Auth::user();
+    @endphp
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'ReXsteam') }}</a>
@@ -30,6 +34,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
+                    @if ($user && $user->inRole('admin'))
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Manage Game</a>
+                        </li>
+                    @endif
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -46,7 +55,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            {{ $user->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
