@@ -46,4 +46,14 @@ class User extends Authenticatable
     public function inRole($role) {
         return $this->role == $role;
     }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transaction');
+    }
+
+    public function friends($status = null)
+    {
+        
+    }
 }

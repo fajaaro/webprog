@@ -11,4 +11,14 @@ class Transaction extends Model
 
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasMany('App\Models\TransactionDetail');
+    }
 }
