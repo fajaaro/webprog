@@ -5,6 +5,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -19,21 +20,21 @@ Route::group(['prefix' => 'games'], function() {
 });
 
 Route::group(['prefix' => 'transactions'], function() {
-    Route::get('/carts', [TransactionController::class, 'carts'])->name('transactions.carts');    
-    Route::get('/informations', [TransactionController::class, 'informations'])->name('transactions.informations');    
-    Route::post('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');    
+    Route::get('/carts', [TransactionController::class, 'carts'])->name('transactions.carts');
+    Route::get('/informations', [TransactionController::class, 'informations'])->name('transactions.informations');
+    Route::post('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');
     Route::get('/receipt/{id}', [TransactionController::class, 'receipt'])->name('transactions.receipt');
 });
 
 Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'games'], function() {
-        Route::get('/', [AdminGameController::class, 'index'])->name('admin.games.index');    
-        Route::get('/create', [AdminGameController::class, 'create'])->name('admin.games.create');    
-        Route::post('/', [AdminGameController::class, 'store'])->name('admin.games.store');    
-        Route::get('/{id}/edit', [AdminGameController::class, 'edit'])->name('admin.games.edit');    
-        Route::put('/{id}', [AdminGameController::class, 'update'])->name('admin.games.update');    
-        Route::delete('/{id}', [AdminGameController::class, 'delete'])->name('admin.games.delete');    
-    });    
+        Route::get('/', [AdminGameController::class, 'index'])->name('admin.games.index');
+        Route::get('/create', [AdminGameController::class, 'create'])->name('admin.games.create');
+        Route::post('/', [AdminGameController::class, 'store'])->name('admin.games.store');
+        Route::get('/{id}/edit', [AdminGameController::class, 'edit'])->name('admin.games.edit');
+        Route::put('/{id}', [AdminGameController::class, 'update'])->name('admin.games.update');
+        Route::delete('/{id}', [AdminGameController::class, 'delete'])->name('admin.games.delete');
+    });
 });
 
 Route::group(['prefix' => 'profiles'], function() {
