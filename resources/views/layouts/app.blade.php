@@ -36,7 +36,7 @@
                     </li>
                     @if ($user && $user->inRole('admin'))
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Manage Game</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.games.index') }}">Manage Game</a>
                         </li>
                     @endif
                 </ul>
