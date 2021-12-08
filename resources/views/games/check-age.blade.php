@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-group w-100 h-75">
-    <div class="card">
+<div class="card-group bg-secondary w-100 h-75 " >
+    <div class="card ">
         <div class="bg-image"style="background-image: url('{{asset('pic1.jpg')}}');height: 50vh">
     </div>
-    <div class="d-flex justify-content-center py-4">
+    <div class="d-flex justify-content-center py-4 bg-light">
         <p>This game is marked as adult content</p>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center bg-light">
         <p>Enter your date of birth to continue</p><br>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center bg-light">
         <select name="day" id="day" required>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -184,11 +184,16 @@
 <option value="2020">2020</option>
 <option value="2021">2021</option>
         </select>
-        <button type="submit" class=""> Continue
 
-        </button>
     </div>
-    <div class="py-3"></div>
+
+    <div class="d-flex justify-content-center  bg-light py-4">
+        <button type="submit" class=""> Continue</button>
+        <button type="submit" class="offset-md-1"> Cancel</button>
+    </div>
+    <div class="py-3 bg-light">
+
+    </div>
 
     </div>
 

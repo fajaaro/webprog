@@ -129,4 +129,5 @@
         <img src="{{asset('pic1.jpg')}}" class="w-100 h-100">
     </div>
   </div>
+
 @endsection
