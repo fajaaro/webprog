@@ -33,9 +33,7 @@
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     @if ($user && $user->inRole('member'))
-                                        <li class="nav-item">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                        </li>
                                     @endif
                                 </div>
                                 <small class="text-muted">Rp.1000000</small>
@@ -53,9 +51,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>
@@ -73,9 +69,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>
@@ -93,9 +87,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>
@@ -113,9 +105,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>
@@ -133,9 +123,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>
@@ -153,9 +141,7 @@
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                       @if ($user && $user->inRole('member'))
-                                          <li class="nav-item">
                                               <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                          </li>
                                       @endif
                                   </div>
                                   <small class="text-muted">Rp.1000000</small>

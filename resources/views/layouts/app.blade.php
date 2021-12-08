@@ -56,7 +56,7 @@
                         <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ $user->name }}
                         </a>
@@ -72,7 +72,27 @@
                                 @csrf
                             </form>
                         </div>
-                    </li>
+                    </li> --}}
+                    <div class="dropdown text-end col-md-1">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                          <li><a class="dropdown-item" href="">Profile</a></li>
+                          <li><a class="dropdown-item" href="">Friends</a></li>
+                          <li><a class="dropdown-item" href="">Transaction History</a></li>
+                          <li><a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                             {{ __('Logout') }}
+                         </a>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        </li>
+                        </ul>
+                      </div>
+                  </div>
                 @endguest
             </div>
         </div>

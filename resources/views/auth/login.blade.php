@@ -68,7 +68,7 @@
     </div>
 </div> --}}
 <div class="card-group w-100 h-100">
-    <div class="card w-100 h100">
+    <div class="card">
       <div class="card-body">
         <form method="POST" action="{{ route('login') }}">
             @csrf
