@@ -6,7 +6,7 @@
         <div class="bg-image"style="background-image: url('{{asset('pic1.jpg')}}');height: 50vh">
     </div>
     <div class="d-flex justify-content-center py-4 bg-light">
-        <p>This game is marked as adult content</p>
+        <p>THIS GAME NAY NOT BE APPROPRIATE FOR ALL AGES, OR MAY NOT BE APPROPRIATE FOR VIEWING AT WORK</p>
     </div>
     <div class="d-flex justify-content-center bg-light">
         <p>Enter your date of birth to continue</p><br>
