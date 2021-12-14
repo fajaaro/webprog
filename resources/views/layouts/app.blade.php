@@ -26,8 +26,8 @@
         $user = Auth::user();
     @endphp
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue shadow-sm">
-        <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue shadow-sm py-3">
+        <div class="container-fluid px-4">
             <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'ReXsteam') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
                         </li>
                     @endif
                 </ul>
-                <form class="d-flex">
+                <form class="d-flex" style="margin-right: 15px;">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
@@ -56,43 +56,22 @@
                         <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    {{-- <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ $user->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li> --}}
-                    <div class="dropdown text-end col-md-1">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <div class="dropdown">
+                        <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ $user->full_name }} <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                          <li><a class="dropdown-item" href="">Profile</a></li>
-                          <li><a class="dropdown-item" href="">Friends</a></li>
-                          <li><a class="dropdown-item" href="">Transaction History</a></li>
-                          <li><a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
-                             {{ __('Logout') }}
-                         </a>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        </li>
+                            <li><a class="dropdown-item" href="">Profile</a></li>
+                            <li><a class="dropdown-item" href="">Friends</a></li>
+                            <li><a class="dropdown-item" href="">Transaction History</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
-                      </div>
-                  </div>
+                    </div>
                 @endguest
             </div>
         </div>
@@ -102,7 +81,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 fixed-bottom">
+    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">
         <div class="d-flex justify-content-between">
             <p>&copy; 2021 ReXsteam. All rights reserved.</p>
             <div>

@@ -4,3 +4,9 @@
 body {
 	background-color: #d1d5db;
 }
+h1 {
+	margin-bottom: 20px;
+}
+.row {
+	width: 100%;
+}
