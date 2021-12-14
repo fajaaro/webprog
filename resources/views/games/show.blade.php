@@ -1,47 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="width: 100%;height: 60%;display: flex;justify-content: center">
-    <div style="background-color: brown;width: 70%">
-        {{-- tempat video --}}
-        <video class="w-100 h-100" autoplay>
-            <source src="movie.mp4" type="video/mp4">
-            <source src="movie.ogg" type="video/ogg">
-          Your browser does not support the video tag.
-          </video>
-        {{-- <img src="{{asset('pic1.jpg')}}" class="w-100 h-100"> --}}
-    </div>
-    <div style="width: 40%" class="px-4 ">
-        <div style="width: 100%;display: flex;justify-content: center">
-            {{-- tempat gambar --}}
-            <img src="{{asset('pic1.jpg')}}" class="w-75 h-75">
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-md-8" id="col-video">
+                <video width="100%" controls>
+                    <source src="{{ str_starts_with($game->trailer_video_url, 'https') ? $game->trailer_video_url : Storage::url($game->trailer_video_url) }}" type="video/mp4">
+                    <source src="{{ str_starts_with($game->trailer_video_url, 'https') ? $game->trailer_video_url : Storage::url($game->trailer_video_url) }}" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-4" id="col-game-detail">
+                <img src="{{ str_starts_with($game->image_url, 'https') ? $game->image_url : Storage::url($game->image_url) }}" class="w-100 mb-3">
+                <h3>{{ $game->title }}</h3>
+                <p>{{ $game->description }}</p>
+                <p>
+                    Genre : {{ $game->genre->name }}<br>
+                    Release Date : {{ date_format(date_create($game->release_date), 'd F Y') }}<br>
+                    Developer : {{ $game->developer }}<br>
+                    Publisher : {{ $game->publisher }}
+                </p>
+            </div>
+        </div>        
+        <div class="card">
+            <div class="card-body d-flex justify-content-between bg-white">
+                <h5>Buy ({{ $game->title }})</h5>
+                <button type="button" class="btn btn-sm btn-secondary">{{ formatRupiah($game->price) }} | Add To Cart</button>
+            </div>
         </div>
-        <div>
-            <h3>Game Name</h3>
-            <p>Mini game description. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum iste vitae, dolore dolor mollitia doloribus ab quia aut aliquid, optio laboriosam hic provident odio dignissimos labore? Suscipit modi vitae ipsa.</p>
-            <p>Genre : Action</p>
-            <p>Release Date : 11 December 2020</p>
-            <p>Developer : ABC production</p>
-            <p>Publisher : abv dsads</p>
-        </div>
+        <h3 class="mt-3">About This Game</h3>
+        <hr style="border: none; height: 3px; color: black; background-color: black;">
+        <p>{!! $game->long_description !!}</p>
     </div>
-</div><br>
-
-  {{-- yg ini dibungkus if kalo yg udh ad game ama blm --}}
-  <div class="card" style="width: 100%;">
-    <div class="card-body" style="display: flex;justify-content: space-between">
-      <h5>Buy (nama game)</h5>
-      <div>
-        <button type="button" class="btn btn-sm btn-outline-secondary">Rp.100000 | Add To Cart</button>
-      </div>
-
-    </div>
-  </div>
-
-  <div>
-    <h1>Obout This Game</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla possimus ad magnam at magni suscipit, cupiditate ea ullam unde sed odio reprehenderit labore eius maxime modi fuga sunt eligendi incidunt.</p>
-  </div>
-
-  <div style="height: 200px"></div>
 @endsection
+

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Game;
+use App\Models\Genre;
 use Illuminate\Database\Seeder;
 
 class GameSeeder extends Seeder
@@ -354,5 +356,23 @@ class GameSeeder extends Seeder
             0,
             0,
         ];
+
+        for ($i = 0; $i < count($gamesTitle); $i++) {
+            $genre = Genre::where('name', $gamesGenre[$i])->first();
+
+            $g = new Game();
+            $g->genre_id = $genre ? $genre->id : null;
+            $g->title = $gamesTitle[$i];
+            $g->image_url = $gamesImageUrl[$i];
+            $g->trailer_video_url = $gamesTrailerVideoUrl[$i];
+            $g->description = $gamesDescription[$i];
+            $g->long_description = $gamesLongDescription[$i];
+            $g->release_date = $gamesReleaseDate[$i];
+            $g->developer = $gamesDeveloper[$i];
+            $g->publisher = $gamesPublisher[$i];
+            $g->price = $gamesPrice[$i];
+            $g->is_adult_content = $gamesIsAdultContent[$i];
+            $g->save();
+        }
     }
 }

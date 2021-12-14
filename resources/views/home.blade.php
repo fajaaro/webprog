@@ -4,34 +4,37 @@
     @php
         $user = Auth::user();
     @endphp
-    
-    <div class="container">
+
+    <div class="container-fluid">
+        <h1>Top Games</h1>
+
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c">
-                            </svg>
-                            <div class="card-body">
-                                <p class="card-text">Game Name.</p>
-                                <p class="card-text">Genre.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+            @foreach ($games as $game)
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm">
+                        <a href="{{ route('games.show', ['id' => $game->id]) }}">
+                            <img src="{{ str_starts_with($game->image_url, 'https') ? $game->image_url : Storage::url($game->image_url) }}" class="card-img-top" alt="game image">                            
+                        </a>
+                        <div class="card-body">
+                            <p class="card-text" style="font-weight: bold;">{{ $game->title }}</p>
+                            <p class="card-text">{{ $game->genre->name }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ route('games.show', ['id' => $game->id]) }}">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        @if ($user && $user->inRole('member'))
-                                          <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                        @endif
-                                    </div>
-                                    <small class="text-muted">Rp.1000000</small>
+                                    </a>
+                                    @if ($user && $user->inRole('member'))
+                                      <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
+                                    @endif
                                 </div>
+                                <small class="text-muted">{{ formatRupiah($game->price) }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
+        <hr>
+        {{ $games->links() }}        
     </div>
 @endsection
