@@ -27,9 +27,9 @@ class GameController extends Controller
 
 	}
 
-	public function show($id)
+	public function show($slug)
 	{
-		$game = Game::find($id);
+		$game = Game::where('slug', $slug)->firstOrFail();
 
 		return view('games.show', compact('game'));
 	}

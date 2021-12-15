@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Game;
 use App\Models\Genre;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class GameSeeder extends Seeder
 {
@@ -363,6 +364,7 @@ class GameSeeder extends Seeder
             $g = new Game();
             $g->genre_id = $genre ? $genre->id : null;
             $g->title = $gamesTitle[$i];
+            $g->slug = Str::slug($gamesTitle[$i], '-');
             $g->image_url = $gamesImageUrl[$i];
             $g->trailer_video_url = $gamesTrailerVideoUrl[$i];
             $g->description = $gamesDescription[$i];

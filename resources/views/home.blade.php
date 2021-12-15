@@ -12,7 +12,7 @@
             @foreach ($games as $game)
                 <div class="col-md-3 mb-3">
                     <div class="card shadow-sm">
-                        <a href="{{ route('games.show', ['id' => $game->id]) }}">
+                        <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
                             <img src="{{ str_starts_with($game->image_url, 'https') ? $game->image_url : Storage::url($game->image_url) }}" class="card-img-top" alt="game image">
                         </a>
                         <div class="card-body">
@@ -20,7 +20,7 @@
                             <p class="card-text">{{ $game->genre->name }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('games.show', ['id' => $game->id]) }}">
+                                    <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     </a>
                                     @if ($user && $user->inRole('member'))
