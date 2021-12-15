@@ -21,7 +21,7 @@
                     Publisher : {{ $game->publisher }}
                 </p>
             </div>
-        </div>        
+        </div>
         <div class="card">
             <div class="card-body d-flex justify-content-between bg-white">
                 <h5>Buy ({{ $game->title }})</h5>
