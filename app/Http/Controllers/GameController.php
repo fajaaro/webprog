@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class GameController extends Controller
 {
@@ -15,22 +17,41 @@ class GameController extends Controller
         return view('games.index', compact('games'));
 	}
 
-	public function checkAge(Request $request)
+	public function checkAge($id)
 	{
-		$gameId = $request->game_id;
+		$game = Game::find($id);
 
-		return view('games.check-age', compact('gameId'));
+		return view('games.check-age', compact('game'));
 	}
 
-	public function processCheckAge(Request $request)
+	public function processCheckAge(Request $request, $id)
 	{
+		$game = Game::find($id);
 
+		$d = $request->day;
+		$m = $request->month;
+		$y = $request->year;
+		$dob = date_create("$y-$m-$d");
+		$age = Carbon::parse($dob)->age;
+
+		Cache::put('is_adult', $age >= 17);
+
+		return redirect()->route('games.show', ['slug' => $game->slug]);
 	}
 
 	public function show($slug)
 	{
 		$game = Game::where('slug', $slug)->firstOrFail();
 
-		return view('games.show', compact('game'));
+		if ($game->is_adult_content) {
+			if (Cache::has('is_adult')) {
+				if (Cache::get('is_adult')) return view('games.show', compact('game'));
+				else return redirect()->route('home');
+			} else {
+				return redirect()->route('games.check-age', ['id' => $game->id]);
+			}
+		} else {
+			return view('games.show', compact('game'));
+		}
 	}
 }

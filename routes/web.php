@@ -14,8 +14,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'games'], function() {
     Route::get('/', [GameController::class, 'index'])->name('games.index');
-    Route::get('/check-age', [GameController::class, 'checkAge'])->name('games.check-age');
-    Route::post('/process-check-age', [GameController::class, 'processCheckAge'])->name('games.process-check-age');
+    Route::get('/{id}/check-age', [GameController::class, 'checkAge'])->name('games.check-age');
+    Route::post('/{id}/process-check-age', [GameController::class, 'processCheckAge'])->name('games.process-check-age');
     Route::get('/{slug}', [GameController::class, 'show'])->name('games.show');
 });
 

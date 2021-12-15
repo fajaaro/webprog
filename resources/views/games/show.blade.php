@@ -33,4 +33,3 @@
         <p>{!! $game->long_description !!}</p>
     </div>
 @endsection
-
