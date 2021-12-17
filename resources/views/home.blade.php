@@ -6,10 +6,12 @@
     @endphp
 
     <div class="container-fluid">
+        @include('flash')
+
         <h1>Top Games</h1>
 
-        <div class="row justify-content-center">
-            @foreach ($games as $game)
+        <div class="row">
+            @forelse ($games as $game)
                 <div class="col-md-3 mb-3">
                     <div class="card shadow-sm">
                         <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
@@ -32,9 +34,17 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col">
+                    <p>There are no games content can be showed right now</p>
+                </div>
+            @endforelse
         </div>
-        <hr>
+
+        @if ($games->lastPage() > 1)
+            <hr>
+        @endif
+        
         {{ $games->links() }}
     </div>
 @endsection

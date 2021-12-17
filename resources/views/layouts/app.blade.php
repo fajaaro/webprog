@@ -37,8 +37,8 @@
                         </li>
                     @endif
                 </ul>
-                <form class="d-flex" style="margin-right: 15px;">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="{{ route('games.index') }}" class="d-flex" style="margin-right: 15px;" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search" value="{{ Request::query('q') }}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 @guest

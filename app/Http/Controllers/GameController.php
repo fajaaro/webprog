@@ -46,7 +46,7 @@ class GameController extends Controller
 		if ($game->is_adult_content) {
 			if (Cache::has('is_adult')) {
 				if (Cache::get('is_adult')) return view('games.show', compact('game'));
-				else return redirect()->route('home');
+				else return redirect()->route('home')->with('failed', "Sorry, there is inappropriate content for you.");
 			} else {
 				return redirect()->route('games.check-age', ['id' => $game->id]);
 			}
