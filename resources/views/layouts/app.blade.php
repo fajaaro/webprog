@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ route('admin.games.index') }}">Manage Game</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.games.create') }}">Create Game</a>
+                        </li>
                     @endif
                 </ul>
                 <form action="{{ route('games.index') }}" class="d-flex" style="margin-right: 15px;" method="get">

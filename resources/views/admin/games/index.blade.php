@@ -11,10 +11,6 @@
         <div class="col-md-9">
           <div class="row">
             <div class="col-md-2">
-              <input type="checkbox" id="idle" name="idle" value="idle">
-              <label for="idle">Idle</label>
-            </div>
-            <div class="col-md-2">
               <input type="checkbox" id="horror" name="horror" value="horror">
               <label for="horror">Horror</label>
             </div>
@@ -27,44 +23,27 @@
               <label for="action">Action</label>
             </div>
             <div class="col-md-2">
-              <input type="checkbox" id="sport" name="sport" value="sport">
-              <label for="sport">Sport</label>
+              <input type="checkbox" id="puzzle" name="puzzle" value="puzzle">
+              <label for="puzzle">Puzzle</label>
             </div>
             <div class="col-md-2">
               <input type="checkbox" id="strategy" name="strategy" value="strategy">
               <label for="strategy">Strategy</label>
-            </div>            
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <input type="checkbox" id="visualnovel" name="visualnovel" value="visualnovel">
-              <label for="visualnovel">Visual Novel</label>
-            </div>
-            <div class="col-md-2">
-              <input type="checkbox" id="vr" name="vr" value="vr">
-              <label for="vr">VR</label>
-            </div>
-            <div class="col-md-2">
-              <input type="checkbox" id="scifi" name="scifi" value="scifi">
-              <label for="scifi">Sci - Fi</label>
-            </div>
-            <div class="col-md-2">
-              <input type="checkbox" id="casual" name="casual" value="casual">
-              <label for="casual">Casual</label>
-            </div>
-            <div class="col-md-2">
-              <input type="checkbox" id="boardgame" name="boardgame" value="boardgame">
-              <label for="boardgame">Board Game</label>
-            </div>
-            <div class="col-md-2">
-              <input type="checkbox" id="mmo" name="mmo" value="mmo">
-              <label for="mmo">MMO-RPG</label>
             </div>
           </div>
           <div class="row">
             <div class="col-md-2">
-              <input type="checkbox" id="simulation" name="simulation" value="simulation">
-              <label for="simulation">Simulation</label>
+                <input type="checkbox" id="mmo" name="mmo" value="mmo">
+                <label for="roleplaying">Role-Playing</label>
+              </div>
+              <div class="col-md-2">
+                <input type="checkbox" id="simulation" name="simulation" value="simulation">
+                <label for="simulation">Simulation</label>
+              </div>
+              <div class="col-md-2">
+                  <input type="checkbox" id="sport" name="sport" value="sport">
+                  <label for="sport">Sport</label>
+                </div>
             </div>
           </div>
         </div>
@@ -83,7 +62,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <button type="button" class="btn btn-sm btn-primary mr-2">Update</button>
-              <button type="button" class="btn btn-sm btn-danger">Delete</button>              
+              <button type="button" class="btn btn-sm btn-danger">Delete</button>
             </div>
             <small class="text-muted">Rp.1000000</small>
           </div>
