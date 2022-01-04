@@ -21,13 +21,18 @@
                             <p class="card-text" style="font-weight: bold;">{{ $game->title }}</p>
                             <p class="card-text">{{ $game->genre->name }}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <div>
+                                    <a href="{{ route('games.show', ['slug' => $game->slug]) }}" class="btn btn-sm btn-outline-secondary">
+                                        View
                                     </a>
                                     @if ($user && $user->inRole('member'))
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                    @endif
+                                        <form action="{{ route('set-cookie') }}" method="post" class="d-inline-block">
+                                            @csrf
+                        
+                                            <input type="hidden" name="game_id" value="{{ $game->id }}">
+                                            <button type="submit" class="btn btn-sm btn-primary">Add To Cart</button>
+                                        </form>
+                                    @endif                                    
                                 </div>
                                 <small class="text-muted">{{ formatRupiah($game->price) }}</small>
                             </div>

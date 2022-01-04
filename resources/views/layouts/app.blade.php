@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    @stack('styles')
 </head>
 <body>
     @php
@@ -57,10 +58,12 @@
                         <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $user->full_name }} <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
-                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                            <li><a class="dropdown-item" href="">Profile</a></li>
-                            <li><a class="dropdown-item" href="">Friends</a></li>
-                            <li><a class="dropdown-item" href="">Transaction History</a></li>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="right: 0; left: auto;">
+                            <li><a class="dropdown-item" href="{{ route('profiles.index') }}">Profile</a></li>
+                            @if ($user->inRole('member'))
+                                <li><a class="dropdown-item" href="">Friends</a></li>
+                                <li><a class="dropdown-item" href="{{ route('transactions.carts') }}">Transaction History</a></li>
+                            @endif
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
