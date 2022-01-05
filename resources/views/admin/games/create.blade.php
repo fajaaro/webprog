@@ -4,7 +4,7 @@
 <h1>Create Game</h1>
   <div style="width: 100%;height: 100%">
     <div>
-        <form action="/">
+        <form action="submit" method="POST">
             <p>Game Name</p>
             <input type="text" class="" style="width: 100%" name="game_name"><br>
             <p>Game Description</p>
