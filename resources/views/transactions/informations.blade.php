@@ -16,40 +16,43 @@
     <input type="text" class="w-100 form-control me-2" placeholder="0000 0000 0000 0000">
     <p class="text-secondary">Visa or Master Card</p>
 
-    <div class="" style=" display: flex;">
-        <div class="" style="width: 1000px">
+    <div class="" style=" display: flex; width: 100%">
+        <div class="" style="width: 1000px;display: flex;flex-direction: column">
           <p>Expire Date</p>
-
-          <input type="number" class="" style="width: 490px" placeholder="MM">
-          <input type="number" class="" style="width: 490px" placeholder="YYYY">
+            <div style="display: flex; flex-direction: row">
+                <input type="number" class="form-control me-2" style="width:50%" placeholder="MM">
+                <input type="number" class="form-control me-2" style="width: 50%" placeholder="YYYY">
+            </div>
         </div>
         <div style=width: 600px">
           <p>CVC /CVV</p>
-          <input type="number" class="" style="width: 500px" placeholder="3 or 4 Digits Number">
+          <input type="number" class="form-control me-2" style="width: 100%" placeholder="3 or 4 Digits Number">
         </div>
     </div><br>
 
-    <div class="" style=" display: flex;">
+    <div class="" style=" width: 100% ;display: flex; ">
       <div class="" style="width: 1000px">
         <p>Country</p>
-        <input type="number" class="" style="width: 985px" placeholder="Country">
+        <input type="text" class=form-control me-2"" style="width: 880px" placeholder="Country">
       </div>
       <div style=width: 600px">
         <p>ZIP</p>
-        <input type="number" class="" style="width: 500px" placeholder="ZIP">
+        <input type="number" class="form-control me-2" style="width: 500px" placeholder="ZIP">
       </div><br>
 
 
-  </div><br><br>
+  </div>
+  <br><br>
 
   <div class="" style=" display: flex;">
       <div class="" style="width: 1000px">
         <h1>Total Price : Rp.10000</h1>
       </div>
-      <div style=width: 600px">
-        <button> Cancel</button>
-        <button >Checkout</button>
+      <div style="width: 600px; display: flex; ">
+        <button class="form-control me-2 bg-danger"> Cancel</button>
+        <button class="form-control me-2 bg-success" >Checkout</button>
       </div><br>
 </div>
 </form>
+<br><br><br>
 @endsection

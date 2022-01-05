@@ -28,11 +28,11 @@
                                     @if ($user && $user->inRole('member'))
                                         <form action="{{ route('set-cookie') }}" method="post" class="d-inline-block">
                                             @csrf
-                        
+
                                             <input type="hidden" name="game_id" value="{{ $game->id }}">
                                             <button type="submit" class="btn btn-sm btn-primary">Add To Cart</button>
                                         </form>
-                                    @endif                                    
+                                    @endif
                                 </div>
                                 <small class="text-muted">{{ formatRupiah($game->price) }}</small>
                             </div>
@@ -52,4 +52,5 @@
 
         {{ $games->links() }}
     </div>
+
 @endsection
