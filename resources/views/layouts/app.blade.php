@@ -84,7 +84,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4" style="position: fixed;left: 0;bottom: 0;width: 100%;">
+    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">
         <div class="d-flex justify-content-between">
             <p>&copy; 2021 ReXsteam. All rights reserved.</p>
             <div>
