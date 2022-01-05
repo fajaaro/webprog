@@ -54,7 +54,10 @@
                         <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    <div class="dropdown">
+                    @if ($user->inRole('member'))
+                    <a href="{{ route('transactions.carts') }}"><img src="{{asset('cart.svg')}}"></a>
+                    @endif
+                    <div class="dropdown offset-md-1">
                         <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $user->full_name }} <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
@@ -81,7 +84,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">
+    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4" style="position: fixed;left: 0;bottom: 0;width: 100%;">
         <div class="d-flex justify-content-between">
             <p>&copy; 2021 ReXsteam. All rights reserved.</p>
             <div>

@@ -67,9 +67,10 @@
         </div>
     </div>
 </div> --}}
-<div class="card-group w-100 h-100">
-    <div class="card">
-      <div class="card-body">
+    <div style="display: flex;justify-content: center;width: 100%">
+    <div class="card" style="display: flex;width: 50%;justify-content: center;">
+        <div class="card-header">{{ __('Login') }}</div>
+      <div class="card-body bg-light" >
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group row">
@@ -109,27 +110,21 @@
                 </div>
             </div>
             <br><br>
-            <div class="form-group row mb-0">
-                <div class="col-md-7 offset-md-3">
-                    <button type="submit" class="btn btn-primary col-md-10">
+            <div class="form-group row mb-0" style="display: flex;justify-content: center">
+                <div class="col-md-7 offset-md-2 ">
+                    <button type="submit"  class="btn btn-primary col-md-10">
                         {{ __('Login') }}
                     </button>
-                    <br><br>
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link offset-md-3" href="{{ route('password.request') }}">
+                </div>
+            </div>
+            @if (Route::has('password.request'))
+                        <a class="btn btn-link offset-md-1" style="display: flex;justify-content: center" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
                     @endif
-                </div>
-            </div>
         </form>
       </div>
     </div>
-    <div class="card">
-        <img src="{{asset('pic1.jpg')}}" class="w-100 h-100">
     </div>
-  </div>
-
-
 
 @endsection

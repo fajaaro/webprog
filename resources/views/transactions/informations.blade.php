@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="progress">
+    <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
+    <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Information</div>
+  </div>
 <div>
     <h1>Transaction Information</h1>
 </div>
