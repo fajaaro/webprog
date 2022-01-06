@@ -33,14 +33,14 @@
 
             <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Game Category') }}</label>
             <select name="day" id="day" class="form-control w-100 h-25" required name="category">
-                <option value="horror">Horror</option>
-                <option value="adventure">Adventure</option>
-                <option value="action">Action</option>
-                <option value="puzzle">Puzzle</option>
-                <option value="strategy">Strategy</option>
-                <option value="sports">Sports</option>
-                <option value="roleplaying">Role-Playing</option>
-                <option value="simulation">Simulation</option>
+                <option value="7">Horror</option>
+                <option value="8">Adventure</option>
+                <option value="4">Action</option>
+                <option value="2">Puzzle</option>
+                <option value="6">Strategy</option>
+                <option value="3">Sports</option>
+                <option value="5">Role-Playing</option>
+                <option value="1">Simulation</option>
             </select>
 
             <label for="developer" class="col-md-4 col-form-label text-md-right">{{ __('Game Developer') }}</label>
@@ -83,8 +83,8 @@
                 </span>
             @enderror
 
-                <input type="checkbox" id="adult" name="adult" value="adult">
-                <label for="adult">Only for Adult ?</label><br>
+                <input type="checkbox" id="adult" name="adult" value="1">
+                <label for="adult" class="col-md-4 col-form-label text-md-right">{{ __('Only For Adult ?') }}</label>
 
                 <div class="row mt-3 d-flex ">
                     <div class="col-md-9">
