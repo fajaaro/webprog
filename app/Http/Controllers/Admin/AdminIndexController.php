@@ -10,6 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         $games = Game::latest()->paginate(8);
+
         return view('home', compact('games'));
     }
 }

@@ -13,4 +13,9 @@ class TransactionDetail extends Model
     {
         return $this->belongsTo('App\Models\Transaction');
     }
+
+    public function game()
+    {
+        return $this->belongsTo('App\Models\Game');
+    }
 }

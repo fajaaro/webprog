@@ -1,52 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="progress">
-    <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
-    <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Information</div>
-    <div class="progress-bar bg-success progress-bar-animated progress-bar-striped" role="progressbar" style="width: 34%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Receipt</div>
+    <div class="container-fluid">
+        <div class="progress">
+            <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
+            <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Information</div>
+            <div class="progress-bar bg-success progress-bar-animated progress-bar-striped" role="progressbar" style="width: 34%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Receipt</div>
+        </div>
 
-  </div>
-<div>
-    <h1>Transaction Receipt</h1>
-</div>
-<div class="container d-flex justify-content-center w-100 h-100 ">
-    <div class="card d-flex " style="width: 60%;flex-direction: row">
-      <div class="card-body" style="width: 60%;">
-        <p>Transaction ID : </p>
-        <p>Purchase Date : </p>
-      </div>
+        <h1>Transaction Receipt</h1>
+
+        <div class="bg-white p-3 mb-2">
+            <p>Transaction ID : {{ $transaction->id }}</p>
+            <p>Purchase Date : {{ $transaction->created_at }}</p>
+        </div>
+
+        @php
+            $totalPrice = 0;
+        @endphp
+
+        @foreach($transaction->transactionDetails as $detail)
+            <div class="bg-white p-3 mb-2">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ str_starts_with($detail->game->image_url, 'https') ? $detail->game->image_url : Storage::url($detail->game->image_url) }}" alt="game pic" class="w-100">
+                    </div>
+                    <div class="col-md-8">
+                        <p><b>{{ $detail->game->title }}</b></p>
+                        <p>{{ formatRupiah($detail->game->price) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            @php
+                $totalPrice += $detail->price;
+            @endphp
+        @endforeach
+
+        <div class="bg-white p-3">
+            <p>Total Price: <b>{{ formatRupiah($totalPrice) }}</b></p>
+
+        </div>
     </div>
-  </div>
-<div class="container d-flex justify-content-center w-100 h-100">
-<div class="card d-flex " style="width: 60%;flex-direction: row">
-  <img class="" src="{{asset('pic1.jpg')}}" alt="Card image cap" style="width: 30%;">
-  <div class="card-body" style="width: 60%;">
-    <h5 class="card-title">Games Name</h5>
-    <p class="card-text">Genre</p>
-    <p>100000</p>
-    <a href="#" class="btn btn-primary">Remove</a>
-  </div>
-</div>
-</div>
-<div class="container d-flex justify-content-center w-100 h-100">
-  <div class="card d-flex " style="width: 60%;flex-direction: row">
-    <img class="" src="{{asset('pic1.jpg')}}" alt="Card image cap" style="width: 30%;">
-    <div class="card-body" style="width: 60%;">
-      <h5 class="card-title">Games Name</h5>
-      <p class="card-text">Genre</p>
-      <p>100000</p>
-      <a href="#" class="btn btn-primary">Remove</a>
-    </div>
-  </div>
-</div>
-<div class="container d-flex justify-content-center w-100 h-100 ">
-  <div class="card d-flex " style="width: 60%;flex-direction: row">
-    <div class="card-body" style="width: 60%;">
-      <h5 class="card-title">Total Price : Rp.200000</h5>
-    </div>
-  </div>
-</div>
-<div class="" style="height: 200px">
-</div>
 @endsection

@@ -44,7 +44,7 @@
         @if ($games->lastPage() > 1)
             <hr>
         @endif
-        
+
         {{ $games->links() }}
     </div>
 @endsection

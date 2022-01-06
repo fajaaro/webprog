@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
-    <div style="width: 70%;display: flex;flex-direction: row;background-color: white; border-radius: 10px;" class="py-3">
-        <div style="height: 100%;width: 30%" class="px-3">
-          <a href="" style="text-decoration: none;color: black">Profile</a><br>
-          <a href="" style="text-decoration: none;color: black">Friends</a><br>
-          <a href=""style="text-decoration: none;color: black">Transaction History</a><br>
+<div class="w-100 h-100 d-flex justify-content-center align-items-center">
+    <div style="background-color: white; border-radius: 10px;" class="py-3 w-75 d-flex flex-row">
+        <div class="px-3 h-100 w-25">
+            <a href="{{ route('profiles.index') }}" style="text-decoration: none;color: black">Profile</a><br>
+            <a href="{{ route('profiles.friends') }}" style="text-decoration: none;color: black">Friends</a><br>
+            <a href="{{ route('profiles.transactions') }}"style="text-decoration: none;color: black">Transaction History</a><br>
         </div>
-        <div style="display: flex;flex-direction: column;height: 100%;width: 70%;border-left: solid">
+        <div style="border-left: solid" class="h-100 w-75 d-flex flex-column">
           <h5 class="px-2">Transaction History</h5><br>
         <div style="border-bottom: solid" class="px-2">
 
 
-              <div style="width: 100%">
-                  <div style="">
+              <div class="w-100">
+                  <div>
                   Transaction ID : dsadjasjdhakjds-98sadasd7a89sd-asda8sd7d <br>
                   Purchase Date: 10-10-2010 08:10:23 <br><br>
                   </div>
@@ -29,10 +29,10 @@
                   <h3>Total Price : 1000000</h3>
               </div>
         </div>
-        <div style="" class="px-2">
+        <div class="px-2">
 
 
-          <div style="width: 100%">
+          <div class="w-100">
               <div style="">
               Transaction ID : dsadjasjdhakjds-98sadasd7a89sd-asda8sd7d <br>
               Purchase Date: 10-10-2010 08:10:23 <br><br>
@@ -55,7 +55,7 @@
     </div>
 
 </div>
-<div style="height: 100px;">
+<br><br><br>
 
 </div>
 @endsection

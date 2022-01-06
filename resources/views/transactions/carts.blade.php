@@ -6,7 +6,6 @@
 
   <div class="progress">
     <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
-
   </div>
 
   <h1>Shopping Cart</h1>
@@ -48,7 +47,7 @@
     <div class="d-flex justify-content-center w-100 h-100 py-2">
       <div class="card-body" style="width: 60%;">
         <h3 class="card-title">Total Price : {{ formatRupiah($totalPrice) }}</h3>
-        <a href="#" class="btn btn-primary">Check Out</a>
+        <a href="{{ route('transactions.informations') }}" class="btn btn-primary">Check Out</a>
       </div>
     </div>
   </div>

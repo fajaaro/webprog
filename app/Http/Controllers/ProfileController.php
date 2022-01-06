@@ -10,4 +10,12 @@ class ProfileController extends Controller
     {
         return view('profiles.index');
     }
+    public function friends()
+    {
+        return view('profiles.friends');
+    }
+    public function transactions()
+    {
+        return view('profiles.transactions');
+    }
 }

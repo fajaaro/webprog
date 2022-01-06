@@ -1,58 +1,89 @@
 @extends('layouts.app')
 
+
 @section('content')
-<div class="progress">
-    <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
-    <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Information</div>
-  </div>
-<div>
-    <h1>Transaction Information</h1>
-</div>
-<div>
-    <form action="">
-    <p>Card Name</p>
-    <input class="form-control me-2" placeholder="Card Name">
-    <p>Card Number</p>
-    <input type="text" class="w-100 form-control me-2" placeholder="0000 0000 0000 0000">
-    <p class="text-secondary">Visa or Master Card</p>
+    <div class="container-fluid">
+        <div class="progress">
+            <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Shopping Cart</div>
+            <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Transaction Information</div>
+        </div>
+    </div>
 
-    <div class="" style=" display: flex; width: 100%">
-        <div class="" style="width: 1000px;display: flex;flex-direction: column">
-          <p>Expire Date</p>
-            <div style="display: flex; flex-direction: row">
-                <input type="number" class="form-control me-2" style="width:50%" placeholder="MM">
-                <input type="number" class="form-control me-2" style="width: 50%" placeholder="YYYY">
+    <div class="container-fluid">
+        <h1>Transaction Information</h1>
+        <form action="{{ route('transactions.checkout') }}" method="post">
+            @csrf
+
+            <div class="row">
+                <div class="col-12">
+                    <label for="card_name">Card Name</label>
+                    <input class="form-control @error('card_name') is-invalid @enderror @error('card_name') is-invalid @enderror" name="card_name" id="card_name" placeholder="Card Name" required value="{{ old('card_name') }}">
+                    {!! errorMessage($errors, 'card_name') !!}
+                </div>
             </div>
-        </div>
-        <div style=width: 600px">
-          <p>CVC /CVV</p>
-          <input type="number" class="form-control me-2" style="width: 100%" placeholder="3 or 4 Digits Number">
-        </div>
-    </div><br>
+            <div class="row mt-2 mb-2">
+                <div class="col-12">
+                    <label for="card_number">Card Number</label>
+                    <input class="form-control @error('card_number') is-invalid @enderror" name="card_number" id="card_number" placeholder="0000 0000 0000 0000" required value="{{ old('card_number') }}">
+                    {!! errorMessage($errors, 'card_number') !!}
+                </div>
+            </div>
 
-    <div class="" style=" width: 100% ;display: flex; ">
-      <div class="" style="width: 1000px">
-        <p>Country</p>
-        <input type="text" class=form-control me-2"" style="width: 880px" placeholder="Country">
-      </div>
-      <div style=width: 600px">
-        <p>ZIP</p>
-        <input type="number" class="form-control me-2" style="width: 500px" placeholder="ZIP">
-      </div><br>
+            <div class="row">
+                <div class="col-md-8">
+                    <label for="expirate_date">Expirate Date</label>
+                    <div class="d-flex">
+                        <div class="w-50">
+                            <input type="number" name="card_exp_month" class="form-control @error('card_exp_month') is-invalid @enderror" placeholder="MM" min="1" max="12" required value="{{ old('card_exp_month') }}">
+                            {!! errorMessage($errors, 'card_exp_month') !!}
+                        </div>
+                        <div class="w-50">
+                            <input type="number" name="card_exp_year" class="form-control @error('card_exp_year') is-invalid @enderror" placeholder="YYYY" min="2021" max="2050" required value="{{ old('card_exp_year') }}">
+                            {!! errorMessage($errors, 'card_exp_year') !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="card_cvc">CVC / CVV</label>
+                    <input type="number" name="card_cvc" id="card_cvc" class="form-control @error('card_cvc') is-invalid @enderror" placeholder="CVC / CVV" required value="{{ old('card_cvc') }}">
+                    {!! errorMessage($errors, 'card_cvc') !!}
+                </div>
+            </div>
 
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <label for="country_id">Country</label>
+                    <select name="country_id" id="country_id" class="form-control @error('country_id') is-invalid @enderror" required>
+                        <option value="">Select Country</option>
+                        @foreach($countries as $country)
+                            <option value="{{ $country->id }}" {{ Request::old('country_id') == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                    {!! errorMessage($errors, 'country_id') !!}
+                </div>
+                <div class="col-md-4">
+                    <label for="zip_code">ZIP</label>
+                    <input type="text" id="zip_code" name="zip_code" class="form-control @error('zip_code') is-invalid @enderror" placeholder="ZIP Code" required value="{{ old('zip_code') }}">
+                    {!! errorMessage($errors, 'zip_code') !!}
+                </div>
+            </div>
 
-  </div>
-  <br><br>
+            @php
+                $totalPrice = 0;
+                foreach ($games as $game) {
+                    $totalPrice += $game->price;
+                }
+            @endphp
 
-  <div class="" style=" display: flex;">
-      <div class="" style="width: 1000px">
-        <h1>Total Price : Rp.10000</h1>
-      </div>
-      <div style="width: 600px; display: flex; ">
-        <button class="form-control me-2 bg-danger"> Cancel</button>
-        <button class="form-control me-2 bg-success" >Checkout</button>
-      </div><br>
-</div>
-</form>
-<br><br><br>
+            <div class="row mt-3 ">
+                <div class="col-md-3">
+                    <p>Total Price: {{ formatRupiah($totalPrice) }}</p>
+                </div>
+                <div class="col-md-9">
+                    <a href="{{ route('transactions.carts') }}" class="btn btn-danger">Cancel</a>
+                    <button class="btn btn-primary">Checkout</button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
