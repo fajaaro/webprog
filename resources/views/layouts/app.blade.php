@@ -65,7 +65,7 @@
                             <li><a class="dropdown-item" href="{{ route('profiles.index') }}">Profile</a></li>
                             @if ($user->inRole('member'))
                                 <li><a class="dropdown-item" href="">Friends</a></li>
-                                <li><a class="dropdown-item" href="{{ route('transactions.carts') }}">Transaction History</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profiles.transactions') }}">Transaction History</a></li>
                             @endif
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
