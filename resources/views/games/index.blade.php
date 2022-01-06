@@ -47,4 +47,5 @@
 
         {{ $games->links() }}
     </div>
+    <br><br> <br>
 @endsection

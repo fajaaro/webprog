@@ -64,7 +64,7 @@
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="right: 0; left: auto;">
                             <li><a class="dropdown-item" href="{{ route('profiles.index') }}">Profile</a></li>
                             @if ($user->inRole('member'))
-                                <li><a class="dropdown-item" href="">Friends</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profiles.friends') }}">Friends</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profiles.transactions') }}">Transaction History</a></li>
                             @endif
                             <li>
