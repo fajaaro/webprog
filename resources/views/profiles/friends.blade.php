@@ -17,7 +17,7 @@
               </form>
               <br>
               <h6>Incoming Friend Request</h6>
-              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 container-fluid">
                   <div class="card w-25" style="background-color: lightgray;">
                       <div class="card-body w-100 h-50 d-flex flex-column" style="background-color: lightgray;">
                           <div class="d-flex flex-row justify-content-around w-100 h-25">
@@ -47,7 +47,7 @@
 
               <br>
               <h6>Pending Friend Request</h6>
-              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 container-fluid">
                 <div class="card w-25" style="background-color: lightgray;">
                     <div class="card-body w-100 h-50 d-flex flex-column" style="background-color: lightgray;">
                         <div class="d-flex flex-row justify-content-around w-100 h-25">
@@ -72,7 +72,7 @@
 
               <br>
               <h6>Your Friend</h6>
-              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="px-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 container-fluid">
                 <div class="card w-25" style="background-color: lightgray;">
                     <div class="card-body w-100 h-50 d-flex flex-column" style="background-color: lightgray;">
                         <div class="d-flex flex-row justify-content-around w-100 h-25">
