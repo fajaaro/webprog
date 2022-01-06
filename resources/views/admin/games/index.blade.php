@@ -83,6 +83,11 @@
             <p>There are no games content can be showed right now</p>
         </div>
     @endforelse
+    @if ($games->lastPage() > 1)
+    <hr>
+@endif
+
+{{ $games->links() }}
 </div>
 
 <br><br>
