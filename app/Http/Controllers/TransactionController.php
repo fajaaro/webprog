@@ -31,29 +31,33 @@ class TransactionController extends Controller
 
     public function checkout(CheckoutTransaction $request)
     {
-        $games = getGames();
-
         $user = Auth::user();
 
-        $trans = new Transaction();
-        $trans->id = Str::random(50);
-        $trans->user_id = $user->id;
-        $trans->save();
+        $games = getGames();
 
-        foreach ($games as $game) {
-            $transDetail = new TransactionDetail();
-            $transDetail->transaction_id = $trans->id;
-            $transDetail->game_id = $game->id;
-            $transDetail->price = $game->price;
-            $transDetail->save();
+        if (count($games) > 0) {
+            $trans = new Transaction();
+            $trans->id = Str::random(50);
+            $trans->user_id = $user->id;
+            $trans->save();
 
-            $user->level += 1;
-            $user->save();
+            foreach ($games as $game) {
+                $transDetail = new TransactionDetail();
+                $transDetail->transaction_id = $trans->id;
+                $transDetail->game_id = $game->id;
+                $transDetail->price = $game->price;
+                $transDetail->save();
+
+                $user->level += 1;
+                $user->save();
+            }
+
+            unsetCookie('carts');
+
+            return redirect()->route('transactions.receipt', ['id' => $trans->id])->with('success', 'Transaction success!');
+        } else {
+            return redirect()->route('transactions.carts')->with('failed', 'There is no game in your carts!');
         }
-
-        unsetCookie('carts');
-
-        return redirect()->route('transactions.receipt', ['id' => $trans->id])->with('success', 'Transaction success!');
     }
 
     public function receipt($id)
