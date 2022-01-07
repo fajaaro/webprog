@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\Genre;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class GameController extends Controller
@@ -30,21 +28,21 @@ class GameController extends Controller
         return view('admin.games.create');
     }
 
-    public function store(array $data)
+    public function store(Request $request)
     {
         return Game::create([
-            'genre_id' => $data['category'],
-            'title' => $data['gamename'],
-            'slug' => Str::slug($data['gamename'], '-'),
-            'image_url' =>$data['cover'],
-            'trailer_video_url' => $data['video'],
-            'description' => $data['game_description'],
-            'long_description' => $data['game_long_description'],
-            'release_date' => Carbon::now(),
-            'developer' =>$data['developer'],
-            'publisher' => $data['publisher'],
-            'price' =>$data['price'],
-            'is_adult_content' => $data['adult'],
+            'genre_id' => $request->genre_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->gamename, '-'),
+            'image_url' => $request->image_url,
+            'trailer_video_url' => $request->trailer_video_url,
+            'description' => $request->description,
+            'long_description' => $request->long_description,
+            'release_date' => now(),
+            'developer' => $request->developer,
+            'publisher' => $request->publisher,
+            'price' => $request->price,
+            'is_adult_content' => $request->is_adult_content,
         ]);
     }
 
@@ -53,26 +51,28 @@ class GameController extends Controller
         return view('admin.games.edit');
     }
 
-    public function update(array $data)
+    public function update(Request $request)
     {
         return Game::update([
-            'genre_id' => $data['category'],
-            'title' => $data['gamename'],
-            'slug' => Str::slug($data['gamename'], '-'),
-            'image_url' =>$data['cover'],
-            'trailer_video_url' => $data['video'],
-            'description' => $data['game_description'],
-            'long_description' => $data['game_long_description'],
-            'release_date' => Carbon::now(),
-            'price' =>$data['price'],
-            'is_adult_content' => $data['adult'],
+            'genre_id' => $request->genre_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->gamename, '-'),
+            'image_url' => $request->image_url,
+            'trailer_video_url' => $request->trailer_video_url,
+            'description' => $request->description,
+            'long_description' => $request->long_description,
+            'release_date' => now(),
+            'price' => $request->price,
+            'is_adult_content' => $request->is_adult_content,
         ]);
-
-
     }
 
-    public function destroy($id)
+    public function delete(Request $request)
     {
+        $game = Game::find($request->game_id);
+        $gameTitle = $game->title;
+        $game->delete();
 
+        return back()->with('success', "$gameTitle has been deleted!");
     }
 }

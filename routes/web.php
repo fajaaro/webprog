@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::post('/', [AdminGameController::class, 'store'])->name('admin.games.store');
         Route::get('/{id}/edit', [AdminGameController::class, 'edit'])->name('admin.games.edit');
         Route::put('/{id}', [AdminGameController::class, 'update'])->name('admin.games.update');
-        Route::delete('/{id}', [AdminGameController::class, 'delete'])->name('admin.games.delete');
+        Route::delete('/', [AdminGameController::class, 'delete'])->name('admin.games.delete');
     });
 });
 

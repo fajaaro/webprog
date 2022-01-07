@@ -1,7 +1,24 @@
 @extends('layouts.app')
 
+@push('styles')
+    <style>
+        #btn-add {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 100%;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid">
+        @include('flash')
+
         <h1>Manage Game</h1>
         <form action="{{ route('admin.games.index') }}" method="get">
             <p>Filter by Game Name</p>
@@ -13,13 +30,14 @@
                     <div class="row">
                         @foreach($genres as $genre)
                             <div class="col-md-2">
-                                <input type="checkbox" id="{{ $genre->name }}" name="genres[]" value="{{ $genre->id }}">
+                                <input type="checkbox" id="{{ $genre->name }}" name="genres[]" value="{{ $genre->id }}" {{ in_array($genre->id, Request::query('genres')) ? 'checked' : '' }}>
                                 <label for="{{ $genre->name }}">{{ $genre->name }}</label>
                             </div>
                         @endforeach
+                    </div>
+                    <button class="btn btn-success mt-3" type="submit">Search</button>
                 </div>
             </div>
-            <button class="btn btn-outline-success px-2 mt-3" type="submit">Search</button>
         </form>
 
         <hr>
@@ -35,14 +53,13 @@
                             <p class="card-text" style="font-weight: bold;">{{ $game->title }}</p>
                             <p class="card-text">{{ $game->genre->name }}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </a>
-                                    <a href="{{ route('admin.games.edit', ['id' => $game->id]) }}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </a>
-
+                                <div>
+                                    <a href="{{ route('admin.games.edit', ['id' => $game->id]) }}" class="btn btn-sm btn-info">
+                                        Update
+                                    </a>                                    
+                                    <button class="btn btn-sm btn-danger remove-game-btn" game_id="{{ $game->id }}">
+                                        Delete
+                                    </button>
                                 </div>
                                 <small class="text-muted">{{ formatRupiah($game->price) }}</small>
                             </div>
@@ -62,5 +79,38 @@
         </div>
     </div>
 
+    <form action="{{ route('admin.games.delete') }}" method="post" id="form-delete-game">
+        @csrf
+        @method('delete')
 
+        <input type="hidden" name="game_id" id="game-id-input">
+    </form>
+
+    <a id="btn-add" class="btn btn-primary" href="{{ route('admin.games.create') }}">+</a>
 @endsection
+
+@push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let removeGameButtons = document.getElementsByClassName('remove-game-btn')
+        Array.from(removeGameButtons).forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                let gameId = e.target.attributes.game_id.value
+
+                Swal.fire({
+                    title: 'Are you sure want to delete game?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('game-id-input').value = gameId
+
+                        document.getElementById('form-delete-game').submit()
+                    } else {
+                      Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

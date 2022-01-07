@@ -80,10 +80,8 @@
         </div>
     </nav>
 
-    <main class="py-4">
-        <br><br>
+    <main class="py-3">
         @yield('content')
-        <br><br>
     </main>
 
     <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">
