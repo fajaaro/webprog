@@ -23,14 +23,14 @@ Route::group(['prefix' => 'games'], function() {
     Route::get('/{slug}', [GameController::class, 'show'])->name('games.show');
 });
 
-Route::group(['prefix' => 'transactions', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'transactions', 'middleware' => ['auth', 'member']], function() {
     Route::get('/carts', [TransactionController::class, 'carts'])->name('transactions.carts');
     Route::get('/informations', [TransactionController::class, 'informations'])->name('transactions.informations');
     Route::post('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');
     Route::get('/receipt/{id}', [TransactionController::class, 'receipt'])->name('transactions.receipt');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
     Route::group(['prefix' => 'games'], function() {
         Route::get('/', [AdminGameController::class, 'index'])->name('admin.games.index');
         Route::get('/create', [AdminGameController::class, 'create'])->name('admin.games.create');
@@ -43,6 +43,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'profiles', 'middleware' => 'auth'], function() {
     Route::get('/', [ProfileController::class, 'index'])->name('profiles.index');
-    Route::get('/friends', [ProfileController::class, 'friends'])->name('profiles.friends');
-    Route::get('/transactions', [ProfileController::class, 'transactions'])->name('profiles.transactions');
+
+    Route::group(['middleware' => 'member'], function() {
+        Route::get('/friends', [ProfileController::class, 'friends'])->name('profiles.friends');
+        Route::get('/transactions', [ProfileController::class, 'transactions'])->name('profiles.transactions');
+    });
 });

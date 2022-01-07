@@ -21,7 +21,7 @@
         $user = Auth::user();
     @endphp
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue shadow-sm py-3 fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark-blue shadow-sm py-3">
         <div class="container-fluid px-4">
             <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'ReXsteam') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
         <br><br>
     </main>
 
-    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4 fixed-bottom">
+    <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">
         <div class="d-flex justify-content-between">
             <p>&copy; 2021 ReXsteam. All rights reserved.</p>
             <div>

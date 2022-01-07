@@ -36,7 +36,7 @@ class TransactionController extends Controller
         $user = Auth::user();
 
         $trans = new Transaction();
-        $trans->id = Str::random(80);
+        $trans->id = Str::random(50);
         $trans->user_id = $user->id;
         $trans->save();
 
