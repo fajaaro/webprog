@@ -11,7 +11,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->foreignId('genre_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->string('slug');
             $table->string('image_url');  
             $table->string('trailer_video_url');  

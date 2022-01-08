@@ -15,7 +15,7 @@
                 <div class="col-md-3 mb-3">
                     <div class="card shadow-sm">
                         <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
-                            <img src="{{ str_starts_with($game->image_url, 'https') ? $game->image_url : Storage::url($game->image_url) }}" class="card-img-top" alt="game image">
+                            <img src="{{ str_starts_with($game->image_url, 'https') ? $game->image_url : Storage::url($game->image_url) }}" class="card-img-top" alt="game image" style="height: 200px;">
                         </a>
                         <div class="card-body">
                             <p class="card-text" style="font-weight: bold;">{{ $game->title }}</p>
