@@ -14,14 +14,14 @@ class TransactionController extends Controller
 {
     public function carts()
     {
-        $games = getGames();
+        $games = getGamesOnCarts();
 
         return view('transactions.carts', compact('games'));
     }
 
     public function informations()
     {
-        $games = getGames();
+        $games = getGamesOnCarts();
         $countries = Country::orderBy('name', 'asc')->get();
 
         if (count($games) == 0) return redirect()->route('transactions.carts')->with('failed', 'You don\'t have any game on your carts!');
@@ -33,7 +33,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
-        $games = getGames();
+        $games = getGamesOnCarts();
 
         if (count($games) > 0) {
             $trans = new Transaction();

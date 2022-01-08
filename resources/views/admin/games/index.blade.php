@@ -3,14 +3,18 @@
 @push('styles')
     <style>
         #btn-add {
-            position: absolute;
+            position: fixed;
             right: 0;
             bottom: 0;
-            margin-right: 10px;
-            padding: 5px 10px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
             border-radius: 100%;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 25px;
+            box-shadow: -4px 3px 32px 0px rgba(255,255,255,0.75);
+            -webkit-box-shadow: -4px 3px 32px 0px rgba(255,255,255,0.75);
+            -moz-box-shadow: -4px 3px 32px 0px rgba(255,255,255,0.75);
         }
     </style>
 @endpush

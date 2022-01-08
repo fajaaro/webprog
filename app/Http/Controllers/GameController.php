@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class GameController extends Controller
@@ -26,6 +27,7 @@ class GameController extends Controller
 
 	public function processCheckAge(Request $request, $id)
 	{
+		$user = Auth::user();
 		$game = Game::find($id);
 
 		$d = $request->day;
@@ -34,18 +36,19 @@ class GameController extends Controller
 		$dob = date_create("$y-$m-$d");
 		$age = Carbon::parse($dob)->age;
 
-		Cache::put('is_adult', $age >= 17);
+		Cache::put($user->id . '_' . 'is_adult', $age >= 17);
 
 		return redirect()->route('games.show', ['slug' => $game->slug]);
 	}
 
 	public function show($slug)
 	{
+		$user = Auth::user();
 		$game = Game::where('slug', $slug)->firstOrFail();
 
 		if ($game->is_adult_content) {
-			if (Cache::has('is_adult')) {
-				if (Cache::get('is_adult')) return view('games.show', compact('game'));
+			if (Cache::has($user->id . '_' . 'is_adult')) {
+				if (Cache::get($user->id . '_' . 'is_adult')) return view('games.show', compact('game'));
 				else return redirect()->route('home')->with('failed', "Sorry, there is inappropriate content for you.");
 			} else {
 				return redirect()->route('games.check-age', ['id' => $game->id]);

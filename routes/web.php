@@ -13,8 +13,10 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::post('/set-cookie', [CookieController::class, 'set'])->name('set-cookie');
-Route::delete('/delete-cookie', [CookieController::class, 'delete'])->name('delete-cookie');
+Route::group(['middleware' => ['auth', 'member']], function() {
+    Route::post('/set-cookie', [CookieController::class, 'set'])->name('set-cookie');
+    Route::delete('/delete-cookie', [CookieController::class, 'delete'])->name('delete-cookie');    
+});
 
 Route::group(['prefix' => 'games'], function() {
     Route::get('/', [GameController::class, 'index'])->name('games.index');

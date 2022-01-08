@@ -34,7 +34,7 @@ function getCarts() {
     return isset($_COOKIE['carts']) ? json_decode($_COOKIE['carts']) : [];
 }
 
-function getGames() {
+function getGamesOnCarts() {
     $games = [];
 
     if (isset($_COOKIE['carts'])) {

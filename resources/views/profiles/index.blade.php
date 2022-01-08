@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('styles')
+    <style>
+        .avatar {
+            width: 10%;
+            margin-right: 10px;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container bg-white" id="container-profile">
         @include('flash')
@@ -12,7 +21,12 @@
                 @endif
             </div>
             <div class="col-md-9">
-                <h6>{{ $user->username }} Profile</h6>
+                <div class="d-flex align-items-center">
+                    @if ($user->avatar_url)
+                        <img src="{{ Storage::url($user->avatar_url) }}" alt="avatar" class="rounded-circle avatar">
+                    @endif
+                    <h6>{{ $user->username }}</h6>
+                </div>
                 <p>This information will be displayed public. So becarefull what you share</p>
                 
                 <form action="{{ route('profiles.update') }}" enctype="multipart/form-data" method="post">
@@ -70,6 +84,7 @@
                         <div class="col-md-6">
                             <label for="new_password">New Password</label>
                             <input type="password" name="new_password" id="new_password" class="form-control @error('new_password') is-invalid @enderror">
+                            <small><em>Only if you want to change your password.</em></small>
                             @error('new_password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -79,6 +94,7 @@
                         <div class="col-md-6">
                             <label for="new_password_confirmation">New Password Confirmation</label>
                             <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control @error('new_password_confirmation') is-invalid @enderror">
+                            <small><em>Only if you want to change your password.</em></small>
                             @error('new_password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
