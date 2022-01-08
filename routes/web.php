@@ -47,6 +47,8 @@ Route::group(['prefix' => 'profiles', 'middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'member'], function() {
         Route::get('/friends', [ProfileController::class, 'friends'])->name('profiles.friends');
+        Route::post('/friends', [ProfileController::class, 'addFriend'])->name('profiles.add-friend');
+        Route::put('/friends', [ProfileController::class, 'updateFriend'])->name('profiles.update-friend');
         Route::get('/transactions', [ProfileController::class, 'transactions'])->name('profiles.transactions');
     });
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfile;
+use App\Models\Friend;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,8 +39,60 @@ class ProfileController extends Controller
 
     public function friends()
     {
-        return view('profiles.friends');
+        $user = Auth::user();
+        $incomingFriends = $user->friends('incoming_friend');
+        $acceptedFriends = $user->friends('accepted_friend');
+        $pendingFriends = $user->friends('pending_friend');
+
+        return view('profiles.friends', compact('user', 'incomingFriends', 'acceptedFriends', 'pendingFriends'));
     }
+
+    public function addFriend(Request $request)
+    {
+        $userTwo = User::where('username', $request->username)->first();
+
+        if (!$userTwo) return back()->with('failed', 'User not found!');
+
+        $friend = Friend::where([
+            ['user_one_id', Auth::id()],
+            ['user_two_id', $userTwo->id],
+        ])->first();
+        if (!$friend) {
+            $friend = Friend::where([
+                ['user_one_id', $userTwo->id],
+                ['user_two_id', Auth::id()],
+            ])->first();
+        }
+
+        if ($friend) {
+            $listName;
+
+            if ($friend->status == 'accepted') $listName = 'friend list';
+            if ($friend->status == 'pending') $listName = 'friend request';
+
+            return back()->with('failed', 'Failed! ' . $request->username . ' is already on your ' . $listName . '.');
+        }
+
+        $friend = new Friend();
+        $friend->user_one_id = Auth::id();
+        $friend->user_two_id = $userTwo->id;
+        $friend->status = 'pending';
+        $friend->save();
+
+        return back()->with('success', 'Success request add friend!');
+    }
+
+    public function updateFriend(Request $request)
+    {
+        $friend = Friend::find($request->id);
+        $friend->status = $request->status;
+        $friend->save();
+
+        if ($friend->status == 'rejected' || $friend->status == 'cancel') $friend->delete();
+
+        return back()->with('success', 'Success!');
+    }
+
     public function transactions()
     {
         $transactions = Auth::user()->transactions;
