@@ -50,17 +50,18 @@ class ProfileController extends Controller
     public function addFriend(Request $request)
     {
         $userTwo = User::where('username', $request->username)->first();
+        $userOneId = Auth::id();
 
         if (!$userTwo) return back()->with('failed', 'User not found!');
 
         $friend = Friend::where([
-            ['user_one_id', Auth::id()],
+            ['user_one_id', $userOneId],
             ['user_two_id', $userTwo->id],
         ])->first();
         if (!$friend) {
             $friend = Friend::where([
                 ['user_one_id', $userTwo->id],
-                ['user_two_id', Auth::id()],
+                ['user_two_id', $userOneId],
             ])->first();
         }
 
@@ -74,7 +75,7 @@ class ProfileController extends Controller
         }
 
         $friend = new Friend();
-        $friend->user_one_id = Auth::id();
+        $friend->user_one_id = $userOneId;
         $friend->user_two_id = $userTwo->id;
         $friend->status = 'pending';
         $friend->save();
@@ -95,8 +96,9 @@ class ProfileController extends Controller
 
     public function transactions()
     {
-        $transactions = Auth::user()->transactions;
+        $user = Auth::user();
+        $transactions = $user->transactions;
 
-        return view('profiles.transactions', compact('transactions'));
+        return view('profiles.transactions', compact('transactions', 'user'));
     }
 }
