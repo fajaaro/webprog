@@ -25,9 +25,6 @@
                                     <a href="{{ route('games.show', ['slug' => $game->slug]) }}">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     </a>
-                                    @if ($user && $user->inRole('member'))
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">Add To Cart</button>
-                                    @endif
                                 </div>
                                 <small class="text-muted">{{ formatRupiah($game->price) }}</small>
                             </div>

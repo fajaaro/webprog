@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
 Route::group(['prefix' => 'profiles', 'middleware' => 'auth'], function() {
     Route::get('/', [ProfileController::class, 'index'])->name('profiles.index');
+    Route::put('/', [ProfileController::class, 'update'])->name('profiles.update');
 
     Route::group(['middleware' => 'member'], function() {
         Route::get('/friends', [ProfileController::class, 'friends'])->name('profiles.friends');

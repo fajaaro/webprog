@@ -59,7 +59,8 @@
                     @endif
                     <div class="dropdown offset-md-1">
                         <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $user->full_name }} <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            {{ $user->full_name }} 
+                            <img src="{{ $user->avatar_url ? Storage::url($user->avatar_url) : 'https://github.com/mdo.png' }}" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="right: 0; left: auto;">
                             <li><a class="dropdown-item" href="{{ route('profiles.index') }}">Profile</a></li>
