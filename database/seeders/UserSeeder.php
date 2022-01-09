@@ -12,9 +12,9 @@ class UserSeeder extends Seeder
     {
         $this->createUser('fajaaro', 'Fajar Hamdani', 'fajar123', 'admin');
         $this->createUser('marwin', 'Marwin', 'marwin123', 'member');
-        $this->createUser('marwin', 'Member 1', 'member123', 'member');
-        $this->createUser('marwin', 'Member 2', 'member123', 'member');
-        $this->createUser('marwin', 'Member 3', 'member123', 'member');
+        $this->createUser('member1', 'Member 1', 'member123', 'member');
+        $this->createUser('member2', 'Member 2', 'member123', 'member');
+        $this->createUser('member3', 'Member 3', 'member123', 'member');
     }
 
     private function createUser($username, $fullName, $password, $role)
