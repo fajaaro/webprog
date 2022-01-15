@@ -11,7 +11,7 @@ function errorMessage($errors, $fieldName) {
 }
 
 function setNewCookie($name, $data) {
-    setcookie($name, $data);
+    setcookie($name, $data, 0, '/');
 }
 
 function unsetCookie($name) {
