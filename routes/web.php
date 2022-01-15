@@ -13,8 +13,10 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::post('/set-cookie', [CookieController::class, 'set'])->name('set-cookie');
-Route::delete('/delete-cookie', [CookieController::class, 'delete'])->name('delete-cookie');
+Route::group(['middleware' => ['auth', 'member']], function() {
+    Route::post('/set-cookie', [CookieController::class, 'set'])->name('set-cookie');
+    Route::delete('/delete-cookie', [CookieController::class, 'delete'])->name('delete-cookie');    
+});
 
 Route::group(['prefix' => 'games'], function() {
     Route::get('/', [GameController::class, 'index'])->name('games.index');
@@ -37,15 +39,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::post('/', [AdminGameController::class, 'store'])->name('admin.games.store');
         Route::get('/{id}/edit', [AdminGameController::class, 'edit'])->name('admin.games.edit');
         Route::put('/{id}', [AdminGameController::class, 'update'])->name('admin.games.update');
-        Route::delete('/{id}', [AdminGameController::class, 'delete'])->name('admin.games.delete');
+        Route::delete('/', [AdminGameController::class, 'delete'])->name('admin.games.delete');
     });
 });
 
 Route::group(['prefix' => 'profiles', 'middleware' => 'auth'], function() {
     Route::get('/', [ProfileController::class, 'index'])->name('profiles.index');
+    Route::put('/', [ProfileController::class, 'update'])->name('profiles.update');
 
     Route::group(['middleware' => 'member'], function() {
         Route::get('/friends', [ProfileController::class, 'friends'])->name('profiles.friends');
+        Route::post('/friends', [ProfileController::class, 'addFriend'])->name('profiles.add-friend');
+        Route::put('/friends', [ProfileController::class, 'updateFriend'])->name('profiles.update-friend');
         Route::get('/transactions', [ProfileController::class, 'transactions'])->name('profiles.transactions');
     });
 });

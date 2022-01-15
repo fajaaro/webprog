@@ -36,9 +36,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ route('admin.games.index') }}">Manage Game</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('admin.games.create') }}">Create Game</a>
-                        </li>
                     @endif
                 </ul>
                 <form action="{{ route('games.index') }}" class="d-flex" style="margin-right: 15px;" method="get">
@@ -59,7 +56,8 @@
                     @endif
                     <div class="dropdown offset-md-1">
                         <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $user->full_name }} <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            {{ $user->full_name }} 
+                            <img src="{{ $user->avatar_url ? Storage::url($user->avatar_url) : 'https://github.com/mdo.png' }}" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="right: 0; left: auto;">
                             <li><a class="dropdown-item" href="{{ route('profiles.index') }}">Profile</a></li>
@@ -80,10 +78,8 @@
         </div>
     </nav>
 
-    <main class="py-4">
-        <br><br>
+    <main class="py-3">
         @yield('content')
-        <br><br>
     </main>
 
     <footer class="bg-dark-blue text-secondary pt-4 pb-2 px-3 mt-4">

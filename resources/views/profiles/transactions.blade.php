@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-100 h-100 d-flex justify-content-center align-items-center">
-        <div style="background-color: white; border-radius: 10px;" class="py-3 w-75 d-flex flex-row">
-            <div class="px-3 h-100 w-25">
-                <a href="{{ route('profiles.index') }}" style="text-decoration: none;color: black">Profile</a><br>
-                <a href="{{ route('profiles.friends') }}" style="text-decoration: none;color: black">Friends</a><br>
-                <a href="{{ route('profiles.transactions') }}"style="text-decoration: none;color: black">Transaction History</a><br>
+    <div class="container bg-white" id="container-profile">
+        @include('flash')
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{ route('profiles.index') }}" class="link {{ request()->is('profiles') ? 'text-info' : '' }}">Profile</a><br>
+                @if ($user->inRole('member'))
+                    <a href="{{ route('profiles.friends') }}" class="link {{ request()->is('profiles/friends') ? 'text-info' : '' }}">Friends</a><br>
+                    <a href="{{ route('profiles.transactions') }}" class="link {{ request()->is('profiles/transactions') ? 'text-info' : '' }}">Transaction History</a><br>
+                @endif
             </div>
-            <div class="h-100 w-75 d-flex flex-column">
-                <h5 class="px-2">Transaction History</h5>
+            <div class="col-md-9">
+                <h6 class="px-2">Transaction History</h5>
                 <div class="px-2">
                     <div class="w-100">
                         @foreach($transactions as $trans)

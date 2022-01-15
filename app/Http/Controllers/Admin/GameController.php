@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreGame;
+use App\Http\Requests\UpdateGame;
 use App\Models\Game;
 use App\Models\Genre;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class GameController extends Controller
@@ -27,52 +28,69 @@ class GameController extends Controller
 
     public function create()
     {
-        return view('admin.games.create');
+        $genres = Genre::all();
+
+        return view('admin.games.create', compact('genres'));
     }
 
-    public function store(array $data)
+    public function store(StoreGame $request)
     {
-        return Game::create([
-            'genre_id' => $data['category'],
-            'title' => $data['gamename'],
-            'slug' => Str::slug($data['gamename'], '-'),
-            'image_url' =>$data['cover'],
-            'trailer_video_url' => $data['video'],
-            'description' => $data['game_description'],
-            'long_description' => $data['game_long_description'],
-            'release_date' => Carbon::now(),
-            'developer' =>$data['developer'],
-            'publisher' => $data['publisher'],
-            'price' =>$data['price'],
-            'is_adult_content' => $data['adult'],
+        $imageUrl = uploadFile($request->file('image'), 'games-image');
+        $trailerVideoUrl = uploadFile($request->file('trailer_video'), 'games-trailer-video');
+
+        $game = Game::create([
+            'genre_id' => $request->genre_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'image_url' => $imageUrl,
+            'trailer_video_url' => $trailerVideoUrl,
+            'description' => $request->description,
+            'long_description' => $request->long_description,
+            'release_date' => now(),
+            'developer' => $request->developer,
+            'publisher' => $request->publisher,
+            'price' => $request->price,
+            'is_adult_content' => $request->is_adult_content ? 1 : 0,
         ]);
+
+        return redirect()->route('admin.games.index')->with('success', 'Success add new game!');
     }
 
     public function edit($id)
     {
-        return view('admin.games.edit');
+        $game = Game::find($id);
+        $genres = Genre::all();
+
+        return view('admin.games.edit', compact('game', 'genres'));
     }
 
-    public function update(array $data)
+    public function update(UpdateGame $request, $id)
     {
-        return Game::update([
-            'genre_id' => $data['category'],
-            'title' => $data['gamename'],
-            'slug' => Str::slug($data['gamename'], '-'),
-            'image_url' =>$data['cover'],
-            'trailer_video_url' => $data['video'],
-            'description' => $data['game_description'],
-            'long_description' => $data['game_long_description'],
-            'release_date' => Carbon::now(),
-            'price' =>$data['price'],
-            'is_adult_content' => $data['adult'],
-        ]);
+        $imageUrl = uploadFile($request->file('image'), 'games-image');
+        $trailerVideoUrl = uploadFile($request->file('trailer_video'), 'games-trailer-video');
 
+        $game = Game::find($id);
 
+        Storage::delete($game->image_url);
+        Storage::delete($game->trailer_video_url);
+
+        $game->description = $request->description;
+        $game->long_description = $request->long_description;
+        $game->genre_id = $request->genre_id;
+        $game->price = $request->price;
+        $game->image_url = $imageUrl;
+        $game->trailer_video_url = $trailerVideoUrl;
+        $game->save();
+
+        return redirect()->route('admin.games.index')->with('success', 'Success update game!');
     }
 
-    public function destroy($id)
+    public function delete(Request $request)
     {
+        $game = Game::find($request->game_id);
+        $gameTitle = $game->title;
+        $game->delete();
 
+        return back()->with('success', "$gameTitle has been deleted!");
     }
 }

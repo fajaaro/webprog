@@ -1,6 +1,15 @@
 <?php
 
 use App\Models\Game;
+use Illuminate\Support\Facades\Storage;
+
+function uploadFile($file, $folderName) {
+    $fileExtension = $file->guessExtension();
+    $fileName = (int)microtime(true) . (int)microtime(true) * 2 . rand(10000, 100000) . '.' . $fileExtension; 
+    $fileUrl = Storage::putFileAs($folderName, $file, $fileName);
+
+    return str_replace('%2F', '/', urlencode($fileUrl));
+}
 
 function formatRupiah($price) {
 	return "Rp" . number_format($price, 2, ',', '.');
@@ -25,7 +34,7 @@ function getCarts() {
     return isset($_COOKIE['carts']) ? json_decode($_COOKIE['carts']) : [];
 }
 
-function getGames() {
+function getGamesOnCarts() {
     $games = [];
 
     if (isset($_COOKIE['carts'])) {
